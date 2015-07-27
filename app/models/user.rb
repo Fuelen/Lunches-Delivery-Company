@@ -3,4 +3,15 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  before_create :set_as_admin_if_first_user
+
+  private
+
+  def set_as_admin_if_first_user
+    unless User.any?
+      self.name  = "Launches Admin"
+      self.admin = true
+    end
+  end
 end
