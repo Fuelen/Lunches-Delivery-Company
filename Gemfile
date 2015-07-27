@@ -51,6 +51,7 @@ group :development, :test do
   # For testing
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'factory_girl_rails'
   # For better errors view
   gem 'better_errors'
 end
