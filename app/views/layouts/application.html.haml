@@ -1,0 +1,17 @@
+!!! 5
+%html
+  %head
+    %title Launches Delivery Company
+    = stylesheet_link_tag    'application', media: 'all',
+                                            'data-turbolinks-track' => true 
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    = render 'layouts/header'
+    .container
+      - flash.each do |key, val|
+        .alert.alert-dismissable{class: "alert-#{key}"}
+          %button.close{type: "button", aria:{hidden: "true"}, data: {dismiss: "alert"}} &times;
+          = val
+      = yield
+    = render 'layouts/footer'
