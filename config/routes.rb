@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
@@ -8,7 +7,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "sign_in", to: "devise/sessions#new"
     get "sign_up", to: "devise/registrations#new"
-    get "sign_out", to: "devise/session#destroy"
+    get "sign_out", to: "devise/sessions#destroy"
     root 'devise/sessions#new'
   end
   # The priority is based upon order of creation: first created -> highest priority.
