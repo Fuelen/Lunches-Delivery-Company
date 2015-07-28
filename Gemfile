@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# For fake data
+gem 'faker'
 # For pagination
 gem 'kaminari'
 # For markup
