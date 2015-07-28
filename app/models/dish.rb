@@ -1,5 +1,5 @@
 class Dish < ActiveRecord::Base
-  enum kind: [ :first_course, :main_course, :drink ]
+  enum kind: [ :first_courses, :main_courses, :drinks ]
 
   validates_presence_of :name, :kind
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
