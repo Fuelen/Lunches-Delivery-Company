@@ -4,7 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :orders
+
   validates_presence_of :name
+
   before_create :set_as_admin_if_first_user
 
   private
