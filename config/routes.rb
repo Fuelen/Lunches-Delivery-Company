@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :dishes, only: [:new, :create] do
-    get 'available_on/:date', action: :available_on, as: :available_on
-  end
+  resources :dishes, only: [:new, :create]
+  get 'dishes/available_on/:date', to: "dishes#available_on",
+    as: :dishes_available_on
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
