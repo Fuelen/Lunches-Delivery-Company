@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# For pagination
+gem 'kaminari'
 # For markup
 gem 'haml'
 gem 'bootstrap-sass'
