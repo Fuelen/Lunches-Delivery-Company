@@ -1,0 +1,13 @@
+%h2 Dishes available on #{@date}
+- if dishes.empty?
+  .alert.alert-info
+    No data
+- else
+  - Dish.kinds.each_key do |kind|
+    .panel.panel-default
+      .panel-heading= kind.humanize
+      %ul.list-group
+        - dishes.send(kind).each do |dish|
+          %li.list-group-item
+            = dish.name 
+            %span.badge= number_to_currency dish.price

@@ -1,6 +1,8 @@
 class DishesController < ApplicationController
   before_action :authenticate_user!
   before_action :for_admin!, only: [:new, :create]
+  before_action :set_date
+  before_action :set_dishes
 
   def new
     @dish = Dish.new
@@ -24,5 +26,12 @@ class DishesController < ApplicationController
     params.require(:dish).permit(:name, :price, :kind)
   end
 
+  def set_dishes
+    @dishes = Dish.where(available_on: @date)
+  end
+
+  def set_date
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+  end
 
 end
