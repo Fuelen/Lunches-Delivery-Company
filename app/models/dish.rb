@@ -1,6 +1,9 @@
 class Dish < ActiveRecord::Base
   enum kind: [ :first_course, :main_course, :drink ]
 
+  validates_presence_of :name, :kind
+  validates :price, numericality: { greater_than_or_equal_to: 0.01 }
+
   before_create :set_available_on_today
 
   private
