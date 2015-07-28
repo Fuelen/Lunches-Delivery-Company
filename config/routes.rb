@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders, only: [:new, :create, :index, :show]
   resources :dishes, only: [:new, :create]
   get 'dishes/available_on/:date', to: "dishes#available_on",
     as: :dishes_available_on
