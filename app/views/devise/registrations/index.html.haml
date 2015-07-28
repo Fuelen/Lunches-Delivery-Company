@@ -1,0 +1,5 @@
+.list-group
+  - @users.each do |user|
+    .list-group-item
+      #{user.name} (#{mail_to user.email})
+= paginate @users

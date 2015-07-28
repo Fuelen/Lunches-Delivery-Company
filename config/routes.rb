@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get "sign_in", to: "devise/sessions#new"
     get "sign_up", to: "devise/registrations#new"
     get "sign_out", to: "devise/sessions#destroy"
+    get "users", to: "users/registrations#index"
     root "dashboard#show"
   end
 
