@@ -1,1 +1,11 @@
 = show_admin_navbar
+%h3 Current week
+.list-groups
+  - current_weekdays do |date, dayname|
+    - if date.future?
+      %p.list-group-item.disabled= dayname
+    - else
+      = link_to dishes_available_on_path(date), class: "list-group-item" do
+        = dayname
+        - if Date.today == date
+          %span.badge today
