@@ -1,5 +1,6 @@
 = show_admin_navbar :orders
-%h3 Orders for #{@date.to_s :long}
-.alert.alert-info
-  Total cost: #{number_to_currency @orders.sum(:total_price)}
-= render @orders
+%br
+= link_to :back, class: "btn btn-default" do
+  %span.glyphicon.glyphicon-arrow-left
+  back
+= render 'orders_on_date', date: @date, orders: @orders

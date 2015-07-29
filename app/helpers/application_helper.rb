@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def format_date(date)
+    if date == Date.today
+      "today"
+    else
+      date.to_s :long
+    end
+  end
+
   def show_admin_navbar(current_page = :dashboard)
     return unless current_user.admin?
     nav_items = { 

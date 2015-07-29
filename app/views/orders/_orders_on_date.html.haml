@@ -1,0 +1,4 @@
+%h3 Orders for #{format_date date}
+.alert.alert-info
+  Total cost: #{number_to_currency orders.sum(:total_price)}
+= render orders

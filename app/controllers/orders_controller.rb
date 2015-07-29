@@ -1,12 +1,12 @@
 class OrdersController < ApplicationController
+  include DateConcern
   before_action :authenticate_user!
   before_action :for_admin!, only: [:show, :index]
   before_action :set_dishes, only: [:new, :create]
+  before_action :set_date,   only: [:index, :created_on]
+  before_action :set_orders, only: [:index, :created_on]
 
   def index
-    @orders_today = Order.where(created_on: Date.today).order(id: :desc)
-      .joins(:first_course, :main_course, :drink,:user)
-      .includes(:first_course, :main_course, :drink,:user)
     @order_dates = Order.select(:created_on).distinct.order(created_on: :desc)
       .page(params[:page])
   end
@@ -27,16 +27,18 @@ class OrdersController < ApplicationController
   end
 
   def created_on
-    @date = Date.parse(params[:date])
-    @orders = Order.where(created_on: @date).order(id: :desc)
-      .joins(:first_course, :main_course, :drink,:user)
-      .includes(:first_course, :main_course, :drink,:user)
   end
 
   private
 
   def set_dishes
     @dishes = Dish.where(available_on: Date.today)
+  end
+
+  def set_orders
+    @orders = Order.where(created_on: @date).order(id: :desc)
+      .joins(:first_course, :main_course, :drink,:user)
+      .includes(:first_course, :main_course, :drink,:user)
   end
 
   def order_params
