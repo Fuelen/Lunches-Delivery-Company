@@ -41,7 +41,7 @@ module ApplicationHelper
         icon: 'shopping-cart'
       }
     }
-    content_tag :div, class: "nav nav-tabs" do
+    content_tag :ul, class: "nav nav-tabs" do
       nav_items.map do |page, attr|
         content_tag :li, class: ("active" if current_page == page) do
           link_to attr[:url] do
