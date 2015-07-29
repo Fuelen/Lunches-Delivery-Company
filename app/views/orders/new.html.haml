@@ -6,7 +6,7 @@
       .col-sm-4
         .form-inputs
           - dish_id_method = "#{kind.singularize}_id"
-          = f.input dish_id_method, label: kind.humanize do
+          = f.input dish_id_method do
             .list-group{"data-toggle": "buttons"}
               - @dishes.send(kind).each do |dish|
                 .btn.btn-default.btn-block{class: ("active" if @order.send(dish_id_method) == dish.id)}
