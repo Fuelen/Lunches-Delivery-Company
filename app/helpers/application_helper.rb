@@ -7,6 +7,10 @@ module ApplicationHelper
     end
   end
 
+  def glyphicon(icon, label = "")
+    "<span class='glyphicon glyphicon-#{icon}'></span> ".html_safe + label
+  end
+
   def show_admin_navbar(current_page = :dashboard)
     return unless current_user.admin?
     nav_items = { 
@@ -35,7 +39,7 @@ module ApplicationHelper
       nav_items.map do |page, attr|
         content_tag :li, class: ("active" if current_page == page) do
           link_to attr[:url] do
-            "<span class='glyphicon glyphicon-#{attr[:icon]}'></span> ".html_safe + attr[:name]
+            glyphicon attr[:icon], attr[:name]
           end
         end
       end.reduce(&:+)
