@@ -8,4 +8,13 @@ class Order < ActiveRecord::Base
                         :main_course_id,
                         :drink_id,
                         :address
+
+  before_create :set_ordered_on_today
+
+
+  private
+
+  def set_ordered_on_today
+    self.ordered_on = Date.today
+  end
 end
