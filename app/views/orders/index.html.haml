@@ -1,0 +1,10 @@
+= show_admin_navbar :orders
+.row
+  .col-sm-6
+    %h3 Orders for today
+    .alert.alert-info
+      Total cost: #{number_to_currency @orders_today.sum(:total_price)}
+    = render @orders_today
+  .col-sm-6
+    %h3 Orders by date
+    = render 'dates_list', orders: @order_dates

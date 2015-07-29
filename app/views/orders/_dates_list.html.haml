@@ -1,0 +1,6 @@
+.list-group
+  - orders.each do |order|
+    = link_to order.created_on.to_s(:long),
+      orders_created_on_path(order.created_on),
+      class: "list-group-item"
+= paginate orders

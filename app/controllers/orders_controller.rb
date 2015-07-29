@@ -5,6 +5,11 @@ class OrdersController < ApplicationController
 
 
   def index
+    @orders_today = Order.where(created_on: Date.today).order(id: :desc)
+      .joins(:first_course, :main_course, :drink,:user)
+      .includes(:first_course, :main_course, :drink,:user)
+    @order_dates = Order.select(:created_on).distinct.order(created_on: :desc)
+      .page(params[:page])
   end
 
   def create
