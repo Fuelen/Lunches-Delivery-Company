@@ -9,12 +9,12 @@ class Order < ActiveRecord::Base
                         :drink_id,
                         :address
 
-  before_create :set_ordered_on_today
+  before_create :set_created_on_today
 
 
   private
 
-  def set_ordered_on_today
-    self.ordered_on = Date.today
+  def set_created_on_today
+    self.created_on = Date.today
   end
 end
