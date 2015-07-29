@@ -7,6 +7,12 @@ module ApplicationHelper
     end
   end
 
+  def link_to_back
+    link_to :back, class: "btn btn-default" do
+      glyphicon "arrow-left", "back"
+    end
+  end
+
   def glyphicon(icon, label = "")
     "<span class='glyphicon glyphicon-#{icon}'></span> ".html_safe + label
   end

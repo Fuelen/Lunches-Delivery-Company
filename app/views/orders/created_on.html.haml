@@ -1,6 +1,4 @@
 = show_admin_navbar :orders
 %br
-= link_to :back, class: "btn btn-default" do
-  %span.glyphicon.glyphicon-arrow-left
-  back
+= link_to_back
 = render 'orders_on_date', date: @date, orders: @orders
