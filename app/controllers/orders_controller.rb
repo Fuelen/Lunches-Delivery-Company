@@ -3,7 +3,6 @@ class OrdersController < ApplicationController
   before_action :for_admin!, only: [:show, :index]
   before_action :set_dishes, only: [:new, :create]
 
-
   def index
     @orders_today = Order.where(created_on: Date.today).order(id: :desc)
       .joins(:first_course, :main_course, :drink,:user)
@@ -25,9 +24,6 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-  end
-
-  def show
   end
 
   private
