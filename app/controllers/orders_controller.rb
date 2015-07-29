@@ -37,6 +37,6 @@ class OrdersController < ApplicationController
       :main_course_id,
       :drink_id,
       :address
-    )
+    ).merge(user_id: current_user.id)
   end
 end
