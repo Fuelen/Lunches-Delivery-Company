@@ -1,0 +1,5 @@
+= show_admin_navbar :orders
+%h3 Orders for #{@date.to_s :long}
+.alert.alert-info
+  Total cost: #{number_to_currency @orders.sum(:total_price)}
+= render @orders

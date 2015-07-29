@@ -26,6 +26,13 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
+  def created_on
+    @date = Date.parse(params[:date])
+    @orders = Order.where(created_on: @date).order(id: :desc)
+      .joins(:first_course, :main_course, :drink,:user)
+      .includes(:first_course, :main_course, :drink,:user)
+  end
+
   private
 
   def set_dishes
