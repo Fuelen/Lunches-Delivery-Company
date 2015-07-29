@@ -9,3 +9,6 @@
 .alert-notice {
   @extend .alert-info;
 }
+.dish-name{
+  white-space: pre-line;
+}

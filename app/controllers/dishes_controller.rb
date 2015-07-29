@@ -9,6 +9,7 @@ class DishesController < ApplicationController
   end
 
   def available_on
+    redirect_to new_order_url if @date == Date.today
   end
 
   def create

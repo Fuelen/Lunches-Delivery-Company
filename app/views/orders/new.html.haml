@@ -1,0 +1,21 @@
+%h2 Make an order
+= simple_form_for @order do |f|
+  = f.error_notification
+  .row
+    - Dish.kinds.each_key do |kind|
+      .col-sm-4
+        .form-inputs
+          %h4.text-center= kind.humanize
+          .list-group{"data-toggle": "buttons"}
+            - @dishes.send(kind).each do |dish|
+              %label.btn.btn-default.btn-block
+                = f.radio_button "#{kind[0..-2]}_id", dish.id
+                %strong.dish-name= dish.name
+                %br
+                = number_to_currency dish.price
+  %hr
+  .form-inputs
+    = f.input :address
+  .form-actions
+    = f.button :submit
+
