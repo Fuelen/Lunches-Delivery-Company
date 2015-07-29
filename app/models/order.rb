@@ -8,6 +8,19 @@ class Order < ActiveRecord::Base
                         :main_course_id,
                         :drink_id,
                         :address
+  validates_each :first_course, :main_course, :drink do |record, kind, dish|
+    if dish.nil?
+      record.errors.add(kind, 'does not exists')
+    else
+      # if drink_id has pizza's id
+      if kind.to_s.pluralize != dish.kind
+        record.errors.add(kind, "is not #{kind.to_s.humanize(capitalize: false)}")
+      end
+      if dish.available_on != Date.today
+        record.errors.add(kind, 'is not available today')
+      end
+    end
+  end
 
   before_create :set_created_on_today
 
