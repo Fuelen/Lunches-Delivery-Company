@@ -3,4 +3,9 @@ class Order < ActiveRecord::Base
   belongs_to :first_course, class_name: "Dish"
   belongs_to :main_course, class_name: "Dish"
   belongs_to :drink, class_name: "Dish"
+
+  validates_presence_of :first_course_id,
+                        :main_course_id,
+                        :drink_id,
+                        :address
 end
