@@ -22,12 +22,15 @@ class Order < ActiveRecord::Base
     end
   end
 
-  before_create :set_created_on_today
-
+  before_create :set_created_on_today, :count_total_price
 
   private
 
   def set_created_on_today
     self.created_on = Date.today
+  end
+
+  def count_total_price
+    self.total_price = first_course.price + main_course.price + drink.price
   end
 end
