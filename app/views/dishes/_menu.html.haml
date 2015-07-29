@@ -1,4 +1,4 @@
-%h2 Dishes available on #{@date}
+%h2 Dishes available on #{format_date @date}
 - if dishes.empty?
   .alert.alert-info
     No data
