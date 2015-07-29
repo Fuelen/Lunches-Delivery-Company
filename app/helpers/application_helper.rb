@@ -14,9 +14,14 @@ module ApplicationHelper
       },
       new_dish: {
         url:  new_dish_path,
-        name: "Make menu for today",
+        name: "Menu for today",
         icon: "menu-hamburger"
       },
+      orders: {
+        url:  orders_path,
+        name: "Orders",
+        icon: 'shopping-cart'
+      }
     }
     content_tag :div, class: "nav nav-tabs" do
       nav_items.map do |page, attr|
