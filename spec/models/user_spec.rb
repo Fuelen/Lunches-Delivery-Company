@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let!(:first_user) { FactoryGirl.create(:user) }
+  let!(:first_user) { create(:user) }
+
   context "when first creating" do
     it "is admin" do
       expect(first_user.admin?).to be true
@@ -13,7 +14,7 @@ RSpec.describe User, type: :model do
   end
 
   context "when second creating" do
-    let(:second_user) { FactoryGirl.create(:other_user) }
+    let(:second_user) { create(:other_user) }
 
     it "is not admin" do
       expect(second_user.admin?).to be false

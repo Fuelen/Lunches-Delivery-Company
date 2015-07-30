@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Dish, type: :model do
   context "before create" do
-    let(:dish) { FactoryGirl.build(:dish) }
+    let(:dish) { build(:dish) }
 
     it "has price lower than 0.01" do
       dish.price = -9.24
@@ -16,7 +16,7 @@ RSpec.describe Dish, type: :model do
   end
 
   context "when created" do
-    let(:dish) { FactoryGirl.create(:dish) }
+    let(:dish) { create(:dish) }
 
     it "is available on today" do
       expect(dish.available_on).to eq Date.today
