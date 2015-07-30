@@ -58,5 +58,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   # For better errors view
   gem 'better_errors'
+
+  # For work with Factory Girl
+  gem 'database_cleaner'
 end
 
