@@ -1,16 +1,17 @@
 FactoryGirl.define do
   factory :user, class: User do
-    name                  "Richard Feynman"
-    email                 "richard@feynman.com"
+    name                  Faker::Internet.name
+    email                 Faker::Internet.email
     password              "12345678"
     password_confirmation "12345678"
-  end
 
-  factory :other_user, class: User do
-    name                  "Jaque Fresco"
-    email                 "jaque@fres.co"
-    password              "12345678"
-    password_confirmation "12345678"
+    factory :other_user do
+      email Faker::Internet.email
+    end
+    factory :admin do
+      email Faker::Internet.email
+      admin true
+    end
   end
 end
 

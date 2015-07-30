@@ -1,9 +1,9 @@
 FactoryGirl.define do
-  factory :dish do
-    name "MyString"
-price "9.99"
-kind 1
-available_on "2015-07-28"
+  factory :dish, aliases: [:main_course], class: Dish do
+    name Faker::Commerce.product_name
+    price Faker::Commerce.price
+    kind :main_courses
+    factory :first_course do kind :first_courses end
+    factory :drink do kind :drinks end
   end
-
 end
