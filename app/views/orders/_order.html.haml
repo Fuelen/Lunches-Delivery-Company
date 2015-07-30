@@ -2,14 +2,16 @@
   .panel-heading
     = order.user.name
     .pull-right ##{order.id}
-  .panel-body
-    Address: #{order.address}
-  .list-group
+  %table.table.table-hover.table-bordered
+    %tr
+      %td Address: 
+      %td{colspan: 2}= order.address
     - Dish.kinds.each_key do |kind|
-      .list-group-item
-        - kind = kind.singularize
-        #{kind.humanize}: #{order.send(kind).name}
-        %span.badge= number_to_currency order.send(kind).price
-  .panel-footer
-    Total:
-    %span.badge.pull-right= number_to_currency order.total_price
+      - kind = kind.singularize
+      %tr
+        %td= kind.humanize
+        %td= order.send(kind).name
+        %td= number_to_currency order.send(kind).price
+    %tr
+      %th{colspan: 2} Total
+      %th= number_to_currency order.total_price
