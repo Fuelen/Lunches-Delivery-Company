@@ -7,8 +7,9 @@ class OrdersController < ApplicationController
   before_action :set_orders, only: [:index, :created_on]
 
   def index
-    @order_dates = Order.select(:created_on).distinct.order(created_on: :desc)
-      .page(params[:page])
+    #distinct not work in kaminari
+    @order_dates = Order.select(:created_on).order(created_on: :desc)
+      .group(:created_on).page(params[:page])
   end
 
   def create
