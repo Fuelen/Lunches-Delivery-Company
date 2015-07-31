@@ -65,3 +65,6 @@ group :test do
   gem 'json-schema'
   gem 'database_cleaner'
 end
+
+# For Heroku
+gem 'rails_12factor', group: :production
