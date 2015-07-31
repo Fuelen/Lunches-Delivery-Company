@@ -5,9 +5,9 @@ feature "Admin" do
   given!(:users) { add_data { create(:user,
                                      email: Faker::Internet.email,
                                      name: Faker::Name.name) } }
-  # After executing this given today is Friday
+  # Add orders and dishes for week, but return array of orders for friday
+  # and after executing this given today well be friday
   given!(:today_orders) { add_orders_for_a_week }
-
 
   scenario "can see admin navbar" do
     ["Dashboard", "Users", "Menu for today", "Orders"].each do |menu_item|
