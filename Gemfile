@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.2.0"
 # For manipulation with time
 gem 'timecop'
 # For fake data
