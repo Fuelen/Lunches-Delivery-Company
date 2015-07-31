@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      get 'orders/today'
+    end
+  end
+
   resources :orders, only: [:new, :create, :index]
   get 'orders/created_on/:date', to: "orders#created_on",
     as: :orders_created_on
