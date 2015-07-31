@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   include DateConcern
   before_action :authenticate_user!
   before_action :for_admin!, only: [:index, :created_on]
+  before_action :protect_from_working_on_weekend, only: [:new, :create]
   before_action :set_dishes, only: [:new, :create]
   before_action :set_date,   only: [:index, :created_on]
   before_action :set_orders, only: [:index, :created_on]

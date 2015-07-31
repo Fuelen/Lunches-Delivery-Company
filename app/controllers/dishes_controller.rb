@@ -1,7 +1,9 @@
 class DishesController < ApplicationController
+  include DateConcern
   before_action :authenticate_user!
   before_action :for_admin!, only: [:new, :create]
   before_action :set_date
+  before_action :protect_from_working_on_weekend, only: [:new, :create]
   before_action :set_dishes
 
   def new
@@ -30,9 +32,4 @@ class DishesController < ApplicationController
   def set_dishes
     @dishes = Dish.where(available_on: @date)
   end
-
-  def set_date
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
-  end
-
 end

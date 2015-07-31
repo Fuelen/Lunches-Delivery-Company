@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
       raise ActionController::RoutingError.new('Not Found')
     end
   end
+
+  def protect_from_working_on_weekend
+    if Date.today.sunday? || Date.today.saturday?
+      redirect_to root_url, notice: "Sorry, but we are not working on weekend"
+    end
+  end
 end
