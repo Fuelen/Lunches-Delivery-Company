@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
-  let(:first_course) { FactoryGirl.create :first_course }
-  let(:main_course) { FactoryGirl.create :main_course }
-  let(:drink) { FactoryGirl.create :drink }
+  let(:first_course) { create :first_course }
+  let(:main_course)  { create :main_course }
+  let(:drink)        { create :drink }
   let(:valid_params_for_create) do
     {
       order: {
@@ -25,7 +25,6 @@ RSpec.describe OrdersController, type: :controller do
         get :index
         expect(response).to redirect_to new_user_session_url
       end
-
     end
 
     describe "POST #create" do
