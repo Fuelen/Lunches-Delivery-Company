@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   def set_as_admin_if_first_user
     unless User.any?
-      self.name  = "Launches Admin"
+      self.name  = "Lunches Admin"
       self.admin = true
     end
   end

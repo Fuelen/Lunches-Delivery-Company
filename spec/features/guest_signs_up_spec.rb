@@ -22,7 +22,7 @@ feature "Signing up" do
 
   scenario "as first user" do
     sign_up_with user_data
-    expect(page).to have_content 'Launches Admin'
+    expect(page).to have_content 'Lunches Admin'
   end
 
 end

@@ -63,7 +63,7 @@ feature "Admin" do
     end
   end
 
-  scenario "can see list of orders and total launch cost for today" do
+  scenario "can see list of orders and total lunch cost for today" do
     click_link "Orders"
     expect(page).to have_css "div.alert.alert-info",text: "Total cost: "
     today_orders.each do |order|

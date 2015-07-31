@@ -8,8 +8,8 @@ RSpec.describe User, type: :model do
       expect(first_user.admin?).to be true
     end
 
-    it "has name 'Launches Admin'" do
-      expect(first_user.name).to eq "Launches Admin"
+    it "has name 'Lunches Admin'" do
+      expect(first_user.name).to eq "Lunches Admin"
     end
   end
 
