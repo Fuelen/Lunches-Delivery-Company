@@ -1,0 +1,39 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "integer" },
+      "address": { "type": "string" },
+      "total_price": { "type": "float" },
+      "user": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string"},
+          "email": { "type": "string"}
+        }
+      },
+      "first_course": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string"},
+          "price": { "type": "float"}
+        }
+      },
+      "main_course": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string"},
+          "price": { "type": "float"}
+        }
+      },
+      "drink": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string"},
+          "price": { "type": "float"}
+        }
+      }
+    }
+  }
+}
