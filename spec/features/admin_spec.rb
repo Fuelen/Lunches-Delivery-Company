@@ -5,9 +5,11 @@ feature "Admin" do
   given!(:users) { add_data { create(:user,
                                      email: Faker::Internet.email,
                                      name: Faker::Name.name) } }
-  # Add orders and dishes for week, but return array of orders for friday
-  # and after executing this given today well be friday
   given!(:today_orders) { add_orders_for_a_week }
+  # There can be any day except Monday (then test which call Date#yesterday
+  # will failure)
+  background { Timecop.freeze(Date.parse("Friday")) }
+  after { Timecop.return }
 
   scenario "can see admin navbar" do
     ["Dashboard", "Users", "Menu for today", "Orders"].each do |menu_item|
@@ -39,13 +41,14 @@ feature "Admin" do
   scenario "can browse days and see user's orders there" do
     click_link "Orders"
     expect(page).to have_css "h3", text: "Orders by date"
-    # Today is Friday, so check if there are 5 days in a list
+    # check if there are all days in a list
     Date.today.beginning_of_week.upto Date.today do |date|
       expect(page).to have_css "div.list-group a.list-group-item",
         text: date.to_s(:long)
     end
     click_link Date.yesterday.to_s(:long)
     expect(page).to have_css "h3", text: "Orders for #{Date.yesterday.to_s :long}"
+    # check whether all orders are there
     Order.where(created_on: Date.yesterday).each do |order|
       expect(page).to have_css "div.panel-heading",
         text: "#{order.user.name} ##{order.id}"

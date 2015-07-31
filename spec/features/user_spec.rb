@@ -3,21 +3,24 @@ require "rails_helper"
 feature "User" do
   background do
     # go to Tuesday
-    Timecop.freeze(Date.today.end_of_week - 5)
+    Timecop.freeze(Date.parse("Tuesday"))
   end
+
   given!(:yesterday_dishes) { add_dishes }
   given!(:yesterday_dayname) { Date.today.strftime "%A" }
 
   background do
     # go to Wednesday
-    Timecop.freeze(Date.today.end_of_week - 4)
+    Timecop.freeze(Date.parse("Wednesday"))
   end
-  given(:current_password) { 12345678 }
+  after { Timecop.return }
+
+  given(:current_password) { 12345678 } # for edit profile
   given(:current_dayname) { Date.today.strftime "%A" } #Wednesday
   given!(:dishes) { add_dishes }
-  given(:first_course) { dishes.reject { |dish| !dish.first_courses? }.sample }
-  given(:main_course) { dishes.reject { |dish| !dish.main_courses? }.sample }
-  given(:drink) { dishes.reject { |dish| !dish.drinks? }.sample }
+  given(:first_course) { dishes.select { |dish| dish.first_courses? }.sample }
+  given(:main_course) { dishes.select { |dish| dish.main_courses? }.sample }
+  given(:drink) { dishes.select { |dish| dish.drinks? }.sample }
   given!(:user) { sign_in_as_user current_password }
 
   scenario "can edit profile" do
@@ -43,7 +46,8 @@ feature "User" do
   scenario "can see list of items with prices for yesterday" do
     click_link yesterday_dayname
 
-    expect(page).to have_css "h2", text: "Dishes available on #{Date.yesterday.to_s :long}"
+    expect(page).to have_css "h2",
+      text: "Dishes available on #{Date.yesterday.to_s :long}"
     ["First courses", "Main courses", "Drinks"].each do |kind|
       expect(page).to have_css "div.panel-heading", text: kind
     end
@@ -56,9 +60,9 @@ feature "User" do
   scenario "can see list of items with prices when make an order" do
     click_link current_dayname
     expect(page).to have_css "h2", text: "Make an order"
-    expect(page).to have_css "label", text: "First course"
-    expect(page).to have_css "label", text: "Main course"
-    expect(page).to have_css "label", text: "Drink"
+    ["First course", "Main course", "Drink"].each do |kind|
+      expect(page).to have_css "label", text: kind
+    end
     dishes.each do |dish|
       expect(page).to have_css "div.order_#{dish.kind.singularize}_id",
         text: "#{dish.name} #{number_to_currency dish.price}"
