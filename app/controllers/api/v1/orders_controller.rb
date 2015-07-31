@@ -1,4 +1,6 @@
-class Api::V1::OrdersController < ApplicationController
+class Api::V1::OrdersController < Api::ApplicationController
+  before_action :authenticate!
+
   def today
     @orders = Order.where(created_on: Date.today)
       .joins(:first_course, :main_course, :drink, :user)
