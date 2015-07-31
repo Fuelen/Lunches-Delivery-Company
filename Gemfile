@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+# For manipulation of time
+gem 'timecop'
 # For fake data
 gem 'faker'
 # For pagination
@@ -58,7 +59,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   # For better errors view
   gem 'better_errors'
-
   # For work with Factory Girl
   gem 'database_cleaner'
 end
