@@ -71,12 +71,26 @@ RSpec.describe OrdersController, type: :controller do
         post :create, valid_params_for_create
         expect(response).to redirect_to root_url
       end
+
+      it "redirects to root when today is weekend" do
+        Timecop.freeze Date.today.end_of_week do
+          post :create
+          expect(response).to redirect_to root_url
+        end
+      end
     end
 
     describe "GET #new" do
       it "responds success" do
         get :new
         expect(response).to have_http_status(:success)
+      end
+
+      it "redirects to root when today is weekend" do
+        Timecop.freeze Date.today.end_of_week do
+          get :new
+          expect(response).to redirect_to root_url
+        end
       end
     end
 

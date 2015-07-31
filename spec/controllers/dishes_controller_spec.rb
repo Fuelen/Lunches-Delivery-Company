@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe DishesController, type: :controller do
   let(:params_for_create) { {dish: {name: "Coca", price: 2, kind: 'drinks'} }}
+  before { Timecop.freeze Date.parse("Wednesday") }
+  after  { Timecop.return }
 
   ########################
   # When visitor is guest
@@ -70,6 +72,13 @@ RSpec.describe DishesController, type: :controller do
         get :new
         expect(response).to have_http_status(:success)
       end
+
+      it "redirects to root when today is weekend" do
+        Timecop.freeze Date.today.end_of_week do
+          get :new
+          expect(response).to redirect_to root_url
+        end
+      end
     end
 
     describe "GET #available_on" do
@@ -88,6 +97,13 @@ RSpec.describe DishesController, type: :controller do
       it "redirects to sign in page" do
         post :create, params_for_create
         expect(response).to have_http_status(:success)
+      end
+
+      it "redirects to root when today is weekend" do
+        Timecop.freeze Date.today.end_of_week do
+          post :create, params_for_create
+          expect(response).to redirect_to root_url
+        end
       end
     end
   end
