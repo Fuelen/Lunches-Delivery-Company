@@ -56,10 +56,11 @@ group :development, :test do
   gem 'spring'
   # For better errors view
   gem 'better_errors'
+
+  gem 'rspec-rails'
 end
 
 group :test do
-  gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'json-schema'
