@@ -47,7 +47,7 @@ feature "User" do
     click_link yesterday_dayname
 
     expect(page).to have_css "h2",
-      text: "Dishes available on #{Date.yesterday.to_s :long}"
+      text: "Dishes available on #{long_date(Date.yesterday)}"
     ["First courses", "Main courses", "Drinks"].each do |kind|
       expect(page).to have_css "div.panel-heading", text: kind
     end

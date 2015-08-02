@@ -61,17 +61,21 @@ RSpec.describe OrdersController, type: :controller do
     end
 
     describe "POST #create" do
-      it "responds success when params is invalid" do
-        post :create, invalid_params_for_create
-        expect(response).to have_http_status(:success)
+      it "responds success when params is invalid on weekday" do
+        Timecop.freeze Date.today.beginning_of_week do
+          post :create, invalid_params_for_create
+          expect(response).to have_http_status(:success)
+        end
       end
 
-      it "redirects to root when params is valid" do
-        post :create, valid_params_for_create
-        expect(response).to redirect_to root_url
+      it "redirects to root when params is valid on weekday" do
+        Timecop.freeze Date.today.beginning_of_week do
+          post :create, valid_params_for_create
+          expect(response).to redirect_to root_url
+        end
       end
 
-      it "redirects to root when today is weekend" do
+      it "redirects to root on weekend" do
         Timecop.freeze Date.today.end_of_week do
           post :create
           expect(response).to redirect_to root_url
@@ -80,12 +84,14 @@ RSpec.describe OrdersController, type: :controller do
     end
 
     describe "GET #new" do
-      it "responds success" do
-        get :new
-        expect(response).to have_http_status(:success)
+      it "responds success on weekday" do
+        Timecop.freeze Date.today.beginning_of_week do
+          get :new
+          expect(response).to have_http_status(:success)
+        end
       end
 
-      it "redirects to root when today is weekend" do
+      it "redirects to root on weekend" do
         Timecop.freeze Date.today.end_of_week do
           get :new
           expect(response).to redirect_to root_url
@@ -115,21 +121,41 @@ RSpec.describe OrdersController, type: :controller do
     end
 
     describe "POST #create" do
-      it "responds success when params is invalid" do
-        post :create, invalid_params_for_create
-        expect(response).to have_http_status(:success)
+      it "responds success when params is invalid on weekday" do
+        Timecop.freeze Date.today.beginning_of_week do
+          post :create, invalid_params_for_create
+          expect(response).to have_http_status(:success)
+        end
       end
 
-      it "redirects to root when params is valid" do
-        post :create, valid_params_for_create
-        expect(response).to redirect_to root_url
+      it "redirects to root when params is valid on weekday" do
+        Timecop.freeze Date.today.beginning_of_week do
+          post :create, valid_params_for_create
+          expect(response).to redirect_to root_url
+        end
+      end
+
+      it "redirects to root on weekend" do
+        Timecop.freeze Date.today.end_of_week do
+          get :new
+          expect(response).to redirect_to root_url
+        end
       end
     end
 
     describe "GET #new" do
-      it "responds success" do
-        get :new
-        expect(response).to have_http_status(:success)
+      it "responds success on weekday" do
+        Timecop.freeze Date.today.beginning_of_week do
+          get :new
+          expect(response).to have_http_status(:success)
+        end
+      end
+
+      it "redirects to root on weekend" do
+        Timecop.freeze Date.today.end_of_week do
+          get :new
+          expect(response).to redirect_to root_url
+        end
       end
     end
 

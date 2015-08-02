@@ -42,13 +42,17 @@ module Features
 
     def add_orders_for_a_week(number = 15)
       today = nil
-      Date.today.beginning_of_week.upto [Date.today, Date.today.end_of_week - 2].min do |date|
+      Date.parse("Monday").upto Date.parse("Friday") do |date|
         Timecop.freeze(date) do
           add_dishes
           today = add_orders
         end
       end
       today #return today's orders
+    end
+
+    def long_date(date)
+      date.to_s(:long).squeeze(" ")
     end
   end
 end
